@@ -71,6 +71,8 @@
 	
 	<distributionManagement>
 
+		<!-- As per http://stackoverflow.com/questions/14013644/hosting-a-maven-repository-on-github -->
+
 	  <snapshotRepository>
 	    <id>internal.repo</id>
 	    <name>Temporary Staging Repository</name>
