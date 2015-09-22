@@ -75,6 +75,7 @@
 	    <id>internal.repo</id>
 	    <name>Temporary Staging Repository</name>
 	    <url>file://${project.build.directory}/maven-repo</url>
+	    <uniqueVersion>false</uniqueVersion>
 	  </snapshotRepository>
 	
 	</distributionManagement>
@@ -94,6 +95,7 @@
 	    </plugin>
 	    
 
+			<!-- As per http://stackoverflow.com/questions/14013644/hosting-a-maven-repository-on-github -->
 			<plugin>
 	      <groupId>com.github.github</groupId>
 	      <artifactId>site-maven-plugin</artifactId>
@@ -102,11 +104,10 @@
 	        <message>Maven artifacts for ${project.version}</message>  <!-- git commit message -->
 	        <noJekyll>true</noJekyll>                                  <!-- disable webpage processing -->
 	        <outputDirectory>${project.build.directory}/maven-repo</outputDirectory>
-	        <branch>refs/heads/master</branch>
-	        <!-- path>maven-repo</path -->
+	        <branch>refs/heads/maven-repo</branch>
 	        <includes><include>**/*</include></includes>
 	        <repositoryName>EBIBioSamples.github.io</repositoryName>      <!-- github repo name -->
-	        <repositoryOwner>marco-brandizi</repositoryOwner>    <!-- github username  -->
+	        <repositoryOwner>EBIBioSamples</repositoryOwner>    <!-- github username  -->
 	      </configuration>
 	      <executions>
 	        <!-- run site-maven-plugin's 'site' target as part of the build's normal 'deploy' phase -->
