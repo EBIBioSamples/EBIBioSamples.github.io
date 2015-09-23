@@ -1,0 +1,164 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>uk.ac.ebi.fg.biosd</groupId>
+  <artifactId>biosd_deploy</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <packaging>pom</packaging>
+
+  <name>BioSD Deploy POM</name>
+  <url>https://github.com/EBIBioSamples/EBIBioSamples.github.io/tree/master</url>
+
+	<description><![CDATA[
+		A simple top module that equips your project with all that you need to deploy into the GitHub web web site for
+		the BioSD project. 
+		
+		This has been built according to:   
+		http://stackoverflow.com/questions/14013644/hosting-a-maven-repository-on-github
+		
+		
+		--------- Deployment ---------
+		
+		In order to deploy your project on: https://github.com/EBIBioSamples/EBIBioSamples.github.io/tree/maven-repo
+		you have to follow these steps: 
+		
+		1. Add our repo in your project (so that you can import this POM):
+		
+		<repository>
+	    <id>EBIBioSamples-GH-repo</id>
+	    <url>https://raw.githubusercontent.com/EBIBioSamples/EBIBioSamples.github.io/maven-repo</url>
+	    <snapshots>
+        <enabled>true</enabled>
+	    </snapshots>
+    </repository>
+		 
+		2. Make your POM a parent of this one:
+		
+		<parent>
+		  <groupId>uk.ac.ebi.fg.biosd</groupId>
+		  <artifactId>biosd_deploy</artifactId>
+		  <version>1.0-SNAPSHOT</version>
+		</parent>
+		
+		3. Ensure your GitHub account can access our https://github.com/EBIBioSamples organisation. 
+		Then generate an OAuth token (or decide to use an existing one) at https://github.com/settings/tokens
+		
+		4. Setup your settings.xml with the your token: 
+
+    <server>
+      <id>github</id>
+      <!-- 
+      	Either you use OAuth tokens (generate one on your account), without username, or you use uname+pass 
+      	We **do recommend** the former
+      -->
+      <!-- username>marco-brandizi</username -->
+      <password>1419bd64f922ed8ec7ffdc9f32d99abfe0675e94</password>
+    </server>
+		 
+		5. Fire 'mvn deploy' from your project dire (where the POM is). You should see it on: 
+		https://raw.githubusercontent.com/EBIBioSamples/EBIBioSamples.github.io/maven-repo
+		
+
+		--------- Usage ---------
+		
+		Once your project has been deployed, you can make a dependant project to link it by simply: 
+		
+		1. Declare our own repository in your dependant POM: 
+		
+		<repositories>
+			<repository>
+		    <id>EBIBioSamples-GH-repo</id>
+		    <url>https://raw.githubusercontent.com/EBIBioSamples/EBIBioSamples.github.io/maven-repo</url>
+		    <snapshots>
+		      <enabled>true</enabled>
+		    </snapshots>
+		  </repository>
+		</repositories>		
+		 
+		2. Fire mvn test/install/etc. That's it! :-)		
+		 
+		 
+		--------- Notes ---------
+		 
+		As you might already have noticed, we're using the special GH repo 
+		https://github.com/EBIBioSamples/EBIBioSamples.github.io, i.e., the repo where the organisation web site goes, in
+		fact you can see the web stuff at http://ebibiosamples.github.io/. We prefer to have a per-organisation repo, rather
+		than per-project (e.g., under gh-pages or project branches), since this avoids the need to refer a lot of 
+		repository URLs in the dependant projects.
+		
+		More precisely, the Maven repo where we send you with this POM is actually under the branch maven-repo. 
+		
+		PLEASE DO NOT FIDDLE WITH THIS BRANCH, let Maven plugins play with it.
+		You migh also have noted that we're using a single repository for both branches and stable versions. We don't see
+		the need to separate the two for small/medium project set.
+		 
+	]]></description>
+	
+	<scm>
+		<developerConnection>scm:git:git@github.com:EBIBioSamples/EBIBioSamples.github.io.git</developerConnection>
+	</scm>	
+	
+
+  <properties>
+		<github.global.server>github</github.global.server>
+	</properties>
+
+
+	
+	<distributionManagement>
+	
+	  <snapshotRepository>
+	    <id>internal.repo</id>
+	    <name>Temporary Staging Repository</name>
+	    <url>file://${project.build.directory}/maven-repo</url>
+	    <uniqueVersion>false</uniqueVersion>
+	  </snapshotRepository>
+		
+  </distributionManagement>	
+
+	<repositories>
+
+		<repository>
+	    <id>EBIBioSamples-GH-repo</id>
+	    <url>https://raw.githubusercontent.com/EBIBioSamples/EBIBioSamples.github.io/maven-repo</url>
+	    <snapshots>
+        <enabled>true</enabled>
+	    </snapshots>
+    </repository>
+	
+	</repositories>
+
+	
+	<build>
+	
+		<plugins>
+
+			<plugin>
+	      <groupId>com.github.github</groupId>
+	      <artifactId>site-maven-plugin</artifactId>
+	      <version>0.11</version>
+	      <configuration>
+	        <message>Maven artifacts for ${project.version}</message>  <!-- git commit message -->
+	        <noJekyll>true</noJekyll>                                  <!-- disable webpage processing -->
+	        <outputDirectory>${project.build.directory}/maven-repo</outputDirectory>
+	        <branch>refs/heads/maven-repo</branch>
+	        <includes><include>**/*</include></includes>
+	        <repositoryName>EBIBioSamples.github.io</repositoryName>      <!-- github repo name -->
+	        <repositoryOwner>EBIBioSamples</repositoryOwner>    <!-- github username  -->
+	      </configuration>
+	      <executions>
+	        <!-- run site-maven-plugin's 'site' target as part of the build's normal 'deploy' phase -->
+	        <execution>
+	          <goals>
+	            <goal>site</goal>
+	          </goals>
+	          <phase>deploy</phase>
+	        </execution>
+	      </executions>
+      </plugin>    	    
+			
+		</plugins>
+	
+	</build>
+
+</project>
