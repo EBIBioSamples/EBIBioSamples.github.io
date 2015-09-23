@@ -6,7 +6,7 @@ in the master branch, is reflected at [http://ebibiosamples.github.io/](http://e
 Moreover, we also use this repository as...
 
 
-# Organisation Maven repository
+## Organisation Maven repository
 
 There is a [special POM project](https://github.com/EBIBioSamples/EBIBioSamples.github.io/tree/master/deploy_pom), 
 which you can use to deploy your own projects here. See [instructions directly inside that POM](https://github.com/EBIBioSamples/EBIBioSamples.github.io/blob/master/deploy_pom/pom.xml).
