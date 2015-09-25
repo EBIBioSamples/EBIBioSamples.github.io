@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata>
+  <groupId>uk.ac.ebi.fg</groupId>
+  <artifactId>myequivalents-prov-wscli</artifactId>
+  <versioning>
+    <versions>
+      <version>1.0-SNAPSHOT</version>
+    </versions>
+    <lastUpdated>20150925133738</lastUpdated>
+  </versioning>
+</metadata>
