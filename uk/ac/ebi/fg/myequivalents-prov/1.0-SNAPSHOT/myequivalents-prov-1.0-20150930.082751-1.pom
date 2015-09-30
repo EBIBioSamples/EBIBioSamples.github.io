@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>uk.ac.ebi.fg</groupId>
+    <artifactId>myequivalents</artifactId>
+		<version>1.0-SNAPSHOT</version>
+  </parent>
+
+  <artifactId>myequivalents-prov</artifactId>
+  <name>My Equivalents, Provenance Ext</name>
+  
+  <description>
+  	The provenance-related modules of myEquivalents track the modification operations that occur in the myEquivalents
+  	infrastructure, recording the users that generated them and allowing for provenance retrieval functionality.
+  </description>
+  
+  <packaging>pom</packaging> 
+  
+  <modules>
+    <module>myequivalents-prov-core</module>
+    <module>myequivalents-prov-db</module>
+    <module>myequivalents-prov-cmdline</module>
+    <module>myequivalents-prov-web</module>
+    <module>myequivalents-prov-wscli</module>
+  </modules>
+  
+</project>
