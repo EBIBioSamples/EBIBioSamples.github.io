@@ -31,7 +31,7 @@
         <enabled>true</enabled>
 	    </snapshots>
     </repository>
-		 
+		 		 
 		2. Make your POM a parent of this one:
 		
 		<parent>
@@ -40,7 +40,12 @@
 		  <version>1.0-SNAPSHOT</version>
 		</parent>
 		
-		3. Ensure your GitHub account can access our https://github.com/EBIBioSamples organisation. 
+		Also, ensure that you don't have a <distributionManagement> section in your POM, since our parent is going to
+		provide the right pointers for that.  
+		
+		3. Ensure your GitHub account can access our https://github.com/EBIBioSamples organisation (i.e., ask us to add
+		it to our organisation and grant proper rights).
+		 
 		Then generate an OAuth token (or decide to use an existing one) at https://github.com/settings/tokens
 		
 		4. Setup your settings.xml with the your token: 
@@ -49,7 +54,7 @@
       <id>github</id>
       <!-- 
       	Either you use OAuth tokens (generate one on your account), without username, or you use uname+pass 
-      	We **do recommend** the former
+      	We **do recommend** the former.
       -->
       <!-- username>marco-brandizi</username -->
       <password>1419bd64f922ed8ec7ffdc9f32d99abfe0675e94</password>
@@ -143,8 +148,9 @@
 	        <outputDirectory>${project.build.directory}/maven-repo</outputDirectory>
 	        <branch>refs/heads/maven-repo</branch>
 	        <includes><include>**/*</include></includes>
-	        <repositoryName>EBIBioSamples.github.io</repositoryName>      <!-- github repo name -->
-	        <repositoryOwner>EBIBioSamples</repositoryOwner>    <!-- github username  -->
+	        <repositoryName>EBIBioSamples.github.io</repositoryName>
+	        <repositoryOwner>EBIBioSamples</repositoryOwner>
+	        <merge>true</merge>
 	      </configuration>
 	      <executions>
 	        <!-- run site-maven-plugin's 'site' target as part of the build's normal 'deploy' phase -->
