@@ -1,0 +1,662 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+				   
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>uk.ac.ebi.fg</groupId>
+  <artifactId>myequivalents</artifactId>
+	<version>1.0-SNAPSHOT</version>
+  <packaging>pom</packaging>
+  <name>My Equivalents Crossreference Mgmt</name>
+
+  <description>
+  	myEquivalents is a system to manage cross-references between entities that can be identified by pairs 
+  	composed of a service name (e.g., EBI's ArrayExpress, Wikipedia) and an accession (e.g., E-MEXP-2514, Barack_Obama).
+  </description>
+ 
+	<url>http://github.com/EBIBioSamples/myequivalents</url>
+  
+  <properties>
+  	<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  	<jersey.version>1.15</jersey.version>
+  	<h2.version>1.3.168</h2.version>
+
+		<oracle.groupId>com.oracle</oracle.groupId>
+		<oracle.artifactId>ojdbc6</oracle.artifactId>
+  	<oracle.version>11.2.0.3.0</oracle.version>
+		<oracle.jdbc.driverClassName>oracle.jdbc.driver.OracleDriver</oracle.jdbc.driverClassName>
+		<oracle.hibernate.dialect>org.hibernate.dialect.Oracle10gDialect</oracle.hibernate.dialect>
+  	
+  	<!--  jetty.version>9.1.3.v20140225</jetty.version -->
+  	<jetty.version>9.2.0.RC0</jetty.version>
+  	<hibernate.version>4.3.5.Final</hibernate.version>
+		<p6spy.version>2.0.2</p6spy.version>
+		<spring.version>4.0.5.RELEASE</spring.version>
+		
+  </properties>
+
+	<modules>
+		<module>myequivalents-core</module>
+		<module>myequivalents-db</module>
+		<module>myequivalents-cmdline</module>
+		<module>myequivalents-web</module>
+		<module>myequivalents-wscli</module>
+		<module>myequivalents-prov</module>
+		<!-- This is only enabled when we do the respective performance tests. -->
+		<!-- module>myequivalents-perftest</module -->
+  </modules>
+        
+	<parent>
+	  <groupId>uk.ac.ebi.fg.biosd</groupId>
+	  <artifactId>biosd_deploy</artifactId>
+	  <version>1.0-SNAPSHOT</version>
+	</parent>
+        
+
+	<dependencies>
+
+		<!-- You need to complete this with interceptors and exclusions, see the modules -->
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>1.6.6</version>
+		</dependency>
+
+            
+		<!-- TEST -->
+
+	  <dependency>
+	    <groupId>junit</groupId>
+	    <artifactId>junit</artifactId>
+	    <version>4.10</version>
+	    <scope>test</scope>
+	  </dependency>
+
+	</dependencies>  
+
+
+	<dependencyManagement>
+	
+		<dependencies>
+		
+			<dependency>
+				<groupId>ch.qos.logback</groupId>
+				<artifactId>logback-classic</artifactId>
+				<version>0.9.29</version>
+			</dependency>
+	
+			<!-- Intercepts log4j and sends it to logback, this usually requires that you override existing log4j dependency with scope = provided -->		
+			<dependency>
+				<groupId>org.slf4j</groupId>
+				<artifactId>log4j-over-slf4j</artifactId>
+				<version>1.6.6</version>
+			</dependency>
+			
+			<!-- The same for Java Common Logging -->
+			<dependency>
+			  <groupId>org.slf4j</groupId>
+			  <artifactId>jcl-over-slf4j</artifactId>
+			  <version>1.6.6</version>
+			</dependency>		
+			
+			<dependency>
+			   <groupId>org.hibernate</groupId>
+			   <artifactId>hibernate-entitymanager</artifactId>
+			   <version>${hibernate.version}</version>
+			</dependency>
+			
+			<dependency>
+			   <groupId>org.hibernate</groupId>
+			   <artifactId>hibernate-validator</artifactId>
+			   <version>5.1.1.Final</version>
+			</dependency>
+			
+			<dependency>
+				<groupId>org.hibernate</groupId>
+				<artifactId>hibernate-c3p0</artifactId>
+			   <version>${hibernate.version}</version>
+			</dependency>
+			            
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-orm</artifactId>
+			 <version>${spring.version}</version>
+			</dependency>	  	
+			            
+			<dependency>
+				<groupId>javax.xml.bind</groupId>
+				<artifactId>jaxb-api</artifactId>
+				<version>2.2.6</version>
+			</dependency>
+			
+			<dependency>
+				<groupId>commons-lang</groupId>
+				<artifactId>commons-lang</artifactId>
+				<version>2.4</version>
+			</dependency>
+            		
+			<dependency>
+				<groupId>commons-beanutils</groupId>
+				<artifactId>commons-beanutils</artifactId>
+				<version>1.8.3</version>
+			</dependency>
+
+			<dependency>
+				<groupId>commons-io</groupId>
+				<artifactId>commons-io</artifactId>
+				<version>2.4</version>
+			</dependency>				            		
+			
+			<!-- Jersey, for Web services -->
+			<dependency>
+				<groupId>com.sun.jersey</groupId>
+				<artifactId>jersey-server</artifactId>
+				<version>${jersey.version}</version>
+			</dependency>
+			
+			<dependency>
+				<groupId>com.sun.jersey</groupId>
+				<artifactId>jersey-servlet</artifactId>
+				<version>${jersey.version}</version>
+			</dependency> 
+			
+			<dependency>
+				<groupId>com.sun.jersey</groupId>
+				<artifactId>jersey-client</artifactId>
+				<version>${jersey.version}</version>
+			</dependency>
+			
+			<dependency>
+        <groupId>com.sun.jersey.contribs</groupId>
+        <artifactId>jersey-multipart</artifactId>			
+				<version>${jersey.version}</version>
+			</dependency>
+        
+			<dependency>
+				<groupId>javax.servlet</groupId>
+				<artifactId>servlet-api</artifactId>
+				<version>2.5</version>
+			</dependency>
+			
+				  
+			<dependency>
+				<groupId>uk.ac.ebi</groupId>
+				<artifactId>jutils</artifactId>
+				<version>4.5</version>
+			</dependency>
+
+			<dependency>
+			 <groupId>org.springframework</groupId>
+			 <artifactId>spring-context</artifactId>
+			 <version>${spring.version}</version>
+			</dependency> 
+
+			<dependency>
+			  <groupId>com.googlecode.catch-exception</groupId>
+			  <artifactId>catch-exception</artifactId>
+			  <version>1.0.4</version>
+			</dependency>
+
+			<dependency>
+				<groupId>joda-time</groupId>
+				<artifactId>joda-time</artifactId>
+				<version>2.3</version>
+			</dependency>
+				  
+			<!-- Utilities for testing (like JUnit rules) -->
+			<dependency>
+				<groupId>com.google.code.tempus-fugit</groupId>
+				<artifactId>tempus-fugit</artifactId>
+				<version>1.2-SNAPSHOT</version>			
+				<scope>test</scope>
+			</dependency>	  
+				  
+			<dependency>
+				<groupId>commons-cli</groupId>
+				<artifactId>commons-cli</artifactId>
+				<version>1.2</version>
+			</dependency>
+				  
+		</dependencies>
+	
+	</dependencyManagement>
+
+
+	<build>
+	
+		<finalName>myequivalents_${project.version}</finalName>
+	
+		<pluginManagement>
+			<plugins>
+			
+	      <plugin>
+					<artifactId>maven-compiler-plugin</artifactId>
+		      <configuration>
+		        <source>1.7</source>
+		        <target>1.7</target>
+		        <encoding>utf-8</encoding>
+		      </configuration>
+		    </plugin>
+		
+		    <plugin>
+			    <artifactId>maven-source-plugin</artifactId>
+			    <executions>
+			      <execution>
+			        <id>attach-source</id>
+			        <goals>
+			          <goal>jar</goal>
+			        </goals>
+			      </execution>
+			    </executions>
+		    </plugin>
+	
+			  <plugin>
+			    <groupId>org.apache.maven.plugins</groupId>
+			    <artifactId>maven-surefire-plugin</artifactId>
+			    <configuration>
+			      <properties>
+							<property>
+								<!-- Prints out spaces and test name before/after every test method and automatically -->
+							  <name>listener</name>
+							  <value>uk.ac.ebi.utils.test.junit.TestOutputDecorator</value>
+							</property>
+			    	</properties>
+			    </configuration>
+			  </plugin>
+			
+				<plugin>
+					<groupId>org.eclipse.jetty</groupId>
+					<artifactId>jetty-maven-plugin</artifactId>
+					<version>${jetty.version}</version>				
+				</plugin>
+	    </plugins>
+		</pluginManagement>
+		
+	
+    <testResources>
+	    <testResource>
+	      <directory>src/test/resources</directory>
+	      <filtering>true</filtering>
+	    </testResource>
+    </testResources>
+
+    <resources>
+	    <resource>
+	      <directory>src/main/resources</directory>
+	      <filtering>true</filtering>
+	    </resource>
+    </resources>
+
+    <extensions>
+	    <extension>
+	      <groupId>org.apache.maven.wagon</groupId>
+	      <artifactId>wagon-ssh</artifactId>
+	      <version>2.2</version>
+	    </extension>
+    </extensions>    
+
+	</build>
+
+	<scm>
+		<developerConnection>scm:git:git@github.com:EBIBioSamples/myequivalents.git</developerConnection>
+	</scm>	
+	
+  <repositories>
+
+		<repository>
+	    <id>EBIBioSamples-GH-repo</id>
+	    <url>https://raw.githubusercontent.com/EBIBioSamples/EBIBioSamples.github.io/maven-repo</url>
+	    <snapshots>
+        <enabled>true</enabled>
+	    </snapshots>
+    </repository>
+
+	  <repository>
+		  <id>biosd-repo</id>
+		  <name>EBI Nexus Repository, Snapshots</name>
+		  <url>http://www.ebi.ac.uk/Tools/maven/repos/content/repositories/biosamples</url>
+	  </repository>
+
+		<repository>
+			<id>ebi-repo-old</id>
+			<name>EBI repo</name>
+			<url>http://www.ebi.ac.uk/~maven/m2repo</url>
+		</repository>
+
+		<repository>
+			<id>springsource-repo</id>
+			<name>SpringSource Repository</name>
+			<url>http://repo.springsource.org/release</url>
+		</repository>
+
+		<repository>
+			<id>sonatype-snapshots</id>
+			<name>Sonatype Snapshots</name>
+			<url>http://oss.sonatype.org/content/repositories/snapshots</url>
+			<snapshots><enabled>true</enabled></snapshots>
+		</repository>
+
+  </repositories>
+
+  
+  <!--
+  	Profiles with test.* are used for tests (mainly JUnit). Profiles without such prefix are used for production-level
+  	things, e.g., deployment of .war(s) or .zip(s) for line command binaries. 
+   -->
+   
+  <profiles>
+  
+  	<profile>
+  		<id>oracle_dev</id>
+  		<activation><activeByDefault>false</activeByDefault></activation>
+  		<properties>
+				<jdbc.username>myeqdev</jdbc.username>
+				<jdbc.password>my3qd3v</jdbc.password>
+				<jdbc.url>jdbc:oracle:thin:@ora-vm-031.ebi.ac.uk:1531:biosdtst</jdbc.url>
+				<jdbc.driverClassName>${oracle.jdbc.driverClassName}</jdbc.driverClassName>
+				<hibernate.dialect>${oracle.hibernate.dialect}</hibernate.dialect>
+				<hibernate.hbm2ddl.auto/>
+			</properties>
+			<dependencies>
+				<dependency>
+					<groupId>${oracle.groupId}</groupId>
+					<artifactId>${oracle.artifactId}</artifactId>
+					<version>${oracle.version}</version>
+				</dependency>
+			</dependencies>
+		</profile>
+  	
+  	<profile>
+  		<id>test.oracle_dev</id>
+  		<activation><activeByDefault>false</activeByDefault></activation>
+  		<properties>
+				<test.jdbc.username>myeqdev</test.jdbc.username>
+				<test.jdbc.password>my3qd3v</test.jdbc.password>
+				<test.jdbc.url>jdbc:oracle:thin:@ora-vm-031.ebi.ac.uk:1531:biosdtst</test.jdbc.url>
+				<test.jdbc.driverClassName>${oracle.jdbc.driverClassName}</test.jdbc.driverClassName>
+				<test.hibernate.dialect>${oracle.hibernate.dialect}</test.hibernate.dialect>
+				<!-- test.hibernate.hbm2ddl.auto>validate</test.hibernate.hbm2ddl.auto -->
+				<test.hibernate.hbm2ddl.auto/>
+			</properties>
+			<dependencies>
+				<dependency>
+					<groupId>${oracle.groupId}</groupId>
+					<artifactId>${oracle.artifactId}</artifactId>
+					<version>${oracle.version}</version>
+				</dependency>
+			</dependencies>
+		</profile>
+
+
+
+  	<profile>
+  		<id>oracle_test</id>
+  		<activation><activeByDefault>false</activeByDefault></activation>
+  		<properties>
+				<jdbc.username>myeqtst</jdbc.username>
+				<jdbc.password>my3qt5t</jdbc.password>
+				<jdbc.url>jdbc:oracle:thin:@ora-vm-031.ebi.ac.uk:1531:biosdtst</jdbc.url>
+				<jdbc.driverClassName>${oracle.jdbc.driverClassName}</jdbc.driverClassName>
+				<hibernate.dialect>${oracle.hibernate.dialect}</hibernate.dialect>
+				<hibernate.hbm2ddl.auto/>
+			</properties>
+			<dependencies>
+				<dependency>
+					<groupId>${oracle.groupId}</groupId>
+					<artifactId>${oracle.artifactId}</artifactId>
+					<version>${oracle.version}</version>
+				</dependency>
+			</dependencies>
+		</profile>
+
+  	<profile>
+  		<id>test.oracle_test</id>
+  		<activation><activeByDefault>false</activeByDefault></activation>
+  		<properties>
+				<test.jdbc.username>myeqtst</test.jdbc.username>
+				<test.jdbc.password>my3qt5t</test.jdbc.password>
+				<test.jdbc.url>jdbc:oracle:thin:@ora-vm-031.ebi.ac.uk:1531:biosdtst</test.jdbc.url>
+				<test.jdbc.driverClassName>${oracle.jdbc.driverClassName}</test.jdbc.driverClassName>
+				<test.hibernate.dialect>${oracle.hibernate.dialect}</test.hibernate.dialect>
+				<test.hibernate.hbm2ddl.auto>update</test.hibernate.hbm2ddl.auto>
+			</properties>
+			<dependencies>
+				<dependency>
+					<groupId>${oracle.groupId}</groupId>
+					<artifactId>${oracle.artifactId}</artifactId>
+					<version>${oracle.version}</version>
+				</dependency>
+			</dependencies>
+		</profile>
+
+
+  	<profile>
+  		<id>oracle_prod</id>
+  		<activation><activeByDefault>false</activeByDefault></activation>
+  		<properties>
+				<jdbc.username>myeq</jdbc.username>
+				<jdbc.password>my3qp4o</jdbc.password>
+				<jdbc.url>jdbc:oracle:thin:@ora-vm-023.ebi.ac.uk:1531:biosdpro</jdbc.url>
+				<jdbc.driverClassName>${oracle.jdbc.driverClassName}</jdbc.driverClassName>
+				<hibernate.dialect>${oracle.hibernate.dialect}</hibernate.dialect>
+				<hibernate.hbm2ddl.auto/>
+			</properties>
+			<dependencies>
+				<dependency>
+					<groupId>${oracle.groupId}</groupId>
+					<artifactId>${oracle.artifactId}</artifactId>
+					<version>${oracle.version}</version>
+				</dependency>
+			</dependencies>
+		</profile>
+
+
+		<!-- Sort of personal database, I use for testing significant changes during development -->
+		<profile>
+			<id>oracle_brandizi</id>
+			<activation>
+				<activeByDefault>false</activeByDefault>
+			</activation>
+			<properties>
+				<jdbc.username>brandizi</jdbc.username>
+				<jdbc.password>brandizi</jdbc.password>
+				<jdbc.url>jdbc:oracle:thin:@ora-vm-031.ebi.ac.uk:1531:biosdtst</jdbc.url>
+				<jdbc.driverClassName>${oracle.jdbc.driverClassName}</jdbc.driverClassName>
+				<hibernate.dialect>${oracle.hibernate.dialect}</hibernate.dialect>
+				<hibernate.hbm2ddl.auto>update</hibernate.hbm2ddl.auto>
+			</properties>
+			<dependencies>
+				<dependency>
+					<groupId>${oracle.groupId}</groupId>
+					<artifactId>${oracle.artifactId}</artifactId>
+					<version>${oracle.version}</version>
+				</dependency>
+			</dependencies>
+		</profile>
+  	
+  	<profile>
+  		<id>test.oracle_brandizi</id>
+  		<activation><activeByDefault>false</activeByDefault></activation>
+  		<properties>
+				<test.jdbc.username>brandizi</test.jdbc.username>
+				<test.jdbc.password>brandizi</test.jdbc.password>
+				<test.jdbc.url>jdbc:oracle:thin:@ora-vm-031.ebi.ac.uk:1531:biosdtst</test.jdbc.url>
+				<test.jdbc.driverClassName>${oracle.jdbc.driverClassName}</test.jdbc.driverClassName>
+				<test.hibernate.dialect>${oracle.hibernate.dialect}</test.hibernate.dialect>
+				<test.hibernate.hbm2ddl.auto>create</test.hibernate.hbm2ddl.auto>
+			</properties>
+			<dependencies>
+				<dependency>
+					<groupId>${oracle.groupId}</groupId>
+					<artifactId>${oracle.artifactId}</artifactId>
+					<version>${oracle.version}</version>
+				</dependency>
+			</dependencies>
+		</profile>
+		
+  	<profile>
+  		<id>test.p6spy.oracle_brandizi</id>
+  		<activation><activeByDefault>false</activeByDefault></activation>
+  		<properties>
+				<test.jdbc.username>brandizi</test.jdbc.username>
+				<test.jdbc.password>brandizi</test.jdbc.password>
+				<test.jdbc.url>jdbc:p6spy:oracle:thin:@ora-vm-031.ebi.ac.uk:1531:biosdtst</test.jdbc.url>
+				<test.jdbc.driverClassName>com.p6spy.engine.spy.P6SpyDriver</test.jdbc.driverClassName>
+				<test.jdbc.spy.driverClassName>${oracle.jdbc.driverClassName}</test.jdbc.spy.driverClassName>
+				<test.hibernate.dialect>${oracle.hibernate.dialect}</test.hibernate.dialect>
+				<test.hibernate.hbm2ddl.auto>update</test.hibernate.hbm2ddl.auto>
+			</properties>
+			<dependencies>
+				<dependency>
+					<groupId>${oracle.groupId}</groupId>
+					<artifactId>${oracle.artifactId}</artifactId>
+					<version>${oracle.version}</version>
+				</dependency>
+				<dependency>
+					<groupId>p6spy</groupId>
+					<artifactId>p6spy</artifactId>
+					<version>${p6spy.version}</version>
+				</dependency>			
+			</dependencies>
+		</profile>		
+  	
+  	
+  	
+		<profile>
+			<id>test.h2</id>
+			<activation><activeByDefault>true</activeByDefault></activation>
+			<properties>
+				<test.jdbc.username>sa</test.jdbc.username>
+				<test.jdbc.password/>
+				<test.jdbc.url>jdbc:h2:mem:testdb;DB_CLOSE_ON_EXIT=FALSE</test.jdbc.url>
+				<test.jdbc.driverClassName>org.h2.Driver</test.jdbc.driverClassName>
+				<test.hibernate.dialect>org.hibernate.dialect.H2Dialect</test.hibernate.dialect>
+				<test.hibernate.hbm2ddl.auto>update</test.hibernate.hbm2ddl.auto>
+			</properties>
+			<dependencies>
+				<dependency>
+					<groupId>com.h2database</groupId>
+					<artifactId>h2</artifactId>
+					<version>${h2.version}</version>
+				</dependency>
+			</dependencies>
+		</profile>
+
+		<profile>
+			<id>test.h2_file</id>
+			<properties>
+				<test.jdbc.username>sa</test.jdbc.username>
+				<test.jdbc.password/>
+				<test.jdbc.url>jdbc:h2:target/database/testdb;DB_CLOSE_ON_EXIT=TRUE</test.jdbc.url>
+				<test.jdbc.driverClassName>org.h2.Driver</test.jdbc.driverClassName>
+				<test.hibernate.dialect>org.hibernate.dialect.H2Dialect</test.hibernate.dialect>
+				<test.hibernate.hbm2ddl.auto>create</test.hibernate.hbm2ddl.auto>
+			</properties>
+			<dependencies>
+				<dependency>
+					<groupId>com.h2database</groupId>
+					<artifactId>h2</artifactId>
+					<version>${h2.version}</version>
+				</dependency>
+			</dependencies>
+		</profile>
+
+		<profile>
+			<id>h2_file</id>
+			<activation><activeByDefault>true</activeByDefault></activation>
+			<properties>
+				<jdbc.username>sa</jdbc.username>
+				<jdbc.password/>
+				<jdbc.url>jdbc:h2:database/testdb;DB_CLOSE_ON_EXIT=TRUE</jdbc.url>
+				<!-- You need java -cp h2*.jar org.h2.tools.Server for this (-? for options) 
+				<jdbc.url>jdbc:h2:tcp://localhost/~/testdb</jdbc.url -->
+				<jdbc.driverClassName>org.h2.Driver</jdbc.driverClassName>
+				<hibernate.dialect>org.hibernate.dialect.H2Dialect</hibernate.dialect>
+				<hibernate.hbm2ddl.auto>update</hibernate.hbm2ddl.auto>
+			</properties>
+			<dependencies>
+				<dependency>
+					<groupId>com.h2database</groupId>
+					<artifactId>h2</artifactId>
+					<version>${h2.version}</version>
+				</dependency>
+			</dependencies>
+		</profile>
+
+
+		<!-- 
+		  This wraps the same settings in h2_file with P6SPY, a filter driver that will log all the SQL statements to
+		  target/spy.log
+		  
+		  You need to have a P6SPY property files in your classpath for this to work 
+		  (see projects like http://github.com/EBIBioSamples/biosd_model_load for details)
+		  
+		  WARNING: we've a few tests not working with this configuration. It seems the old HSQL driver, mentioned in 
+		  spy.properties, is used, instead of the one specified here.
+		-->
+		<profile>
+			<id>test.p6spy.h2_file</id>
+			<properties>
+				<test.jdbc.username>sa</test.jdbc.username>
+				<test.jdbc.password/>
+				<test.jdbc.url>jdbc:p6spy:h2:target/database/testdb</test.jdbc.url>
+				<test.jdbc.driverClassName>com.p6spy.engine.spy.P6SpyDriver</test.jdbc.driverClassName>
+				<test.jdbc.spy.driverClassName>org.h2.Driver</test.jdbc.spy.driverClassName>
+				<test.hibernate.dialect>org.hibernate.dialect.H2Dialect</test.hibernate.dialect>
+				<test.hibernate.hbm2ddl.auto>create</test.hibernate.hbm2ddl.auto>
+			</properties>
+			<dependencies>
+				<dependency>
+					<groupId>p6spy</groupId>
+					<artifactId>p6spy</artifactId>
+					<version>${p6spy.version}</version>
+				</dependency>			
+				<dependency>
+					<groupId>com.h2database</groupId>
+					<artifactId>h2</artifactId>
+					<version>${h2.version}</version>
+				</dependency>
+			</dependencies>
+		</profile>
+
+
+
+  	<profile>
+  		<id>mysql</id>
+  		<properties>
+				<jdbc.username>myequivalents</jdbc.username>
+				<jdbc.password>myequ293</jdbc.password>
+				<jdbc.url>jdbc:mysql://localhost/myequivalents_test</jdbc.url>
+				<jdbc.driverClassName>com.mysql.jdbc.Driver</jdbc.driverClassName>
+				<hibernate.dialect>org.hibernate.dialect.MySQLDialect</hibernate.dialect>
+				<hibernate.hbm2ddl.auto>update</hibernate.hbm2ddl.auto>
+  		</properties>
+  		<dependencies>
+				<dependency>
+						<groupId>mysql</groupId>
+						<artifactId>mysql-connector-java</artifactId>
+						<version>5.1.21</version>
+				</dependency>  		
+  		</dependencies>
+  	</profile>
+
+  	<profile>
+  		<id>test.mysql</id>
+  		<properties>
+				<test.jdbc.username>myequivalents</test.jdbc.username>
+				<test.jdbc.password>myequ293</test.jdbc.password>
+				<test.jdbc.url>jdbc:mysql://localhost/myequivalents_test</test.jdbc.url>
+				<test.jdbc.driverClassName>com.mysql.jdbc.Driver</test.jdbc.driverClassName>
+				<test.hibernate.dialect>org.hibernate.dialect.MySQL5InnoDBDialect</test.hibernate.dialect>
+				<test.hibernate.hbm2ddl.auto>create</test.hibernate.hbm2ddl.auto>
+  		</properties>
+  		<dependencies>
+				<dependency>
+						<groupId>mysql</groupId>
+						<artifactId>mysql-connector-java</artifactId>
+						<version>5.1.36</version>
+				</dependency>  		
+  		</dependencies>
+  	</profile>
+  	 		
+  </profiles>
+</project>
