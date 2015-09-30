@@ -3,10 +3,9 @@
   <groupId>uk.ac.ebi.fg</groupId>
   <artifactId>myequivalents-web</artifactId>
   <versioning>
-    <release>1.0</release>
     <versions>
-      <version>1.0</version>
+      <version>1.1-SNAPSHOT</version>
     </versions>
-    <lastUpdated>20150930102107</lastUpdated>
+    <lastUpdated>20150930110017</lastUpdated>
   </versioning>
 </metadata>
