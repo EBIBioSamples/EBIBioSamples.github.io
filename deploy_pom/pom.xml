@@ -118,6 +118,14 @@
 	    <url>file://${project.build.directory}/maven-repo</url>
 	    <uniqueVersion>false</uniqueVersion>
 	  </snapshotRepository>
+
+	  <repository>
+	    <id>internal.repo</id>
+	    <name>Temporary Staging Repository</name>
+	    <url>file://${project.build.directory}/maven-repo</url>
+	    <uniqueVersion>false</uniqueVersion>
+	  </repository>
+
 		
   </distributionManagement>	
 
