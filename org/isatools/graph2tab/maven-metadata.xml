@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata>
+  <groupId>org.isatools</groupId>
+  <artifactId>graph2tab</artifactId>
+  <versioning>
+    <versions>
+      <version>4.5.1-SNAPSHOT</version>
+    </versions>
+    <lastUpdated>20151022103449</lastUpdated>
+  </versioning>
+</metadata>
