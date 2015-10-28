@@ -60,7 +60,7 @@
       <password>1419bd64f922ed8ec7ffdc9f32d99abfe0675e94</password>
     </server>
 		 
-		5. Fire 'mvn deploy' from your project dire (where the POM is). You should see it on: 
+		5. Fire 'mvn deploy' from your project directory (where the POM is). You should see it on: 
 		https://raw.githubusercontent.com/EBIBioSamples/EBIBioSamples.github.io/maven-repo
 		
 
@@ -79,6 +79,8 @@
 		    </snapshots>
 		  </repository>
 		</repositories>		
+		
+		1b. Add your project as a <dependency> in the dependant POM (obviously).
 		 
 		2. Fire mvn test/install/etc. That's it! :-)		
 		 
@@ -95,7 +97,7 @@
 		
 		PLEASE DO NOT FIDDLE WITH THIS BRANCH, let Maven plugins play with it.
 		You migh also have noted that we're using a single repository for both branches and stable versions. We don't see
-		the need to separate the two for small/medium project set.
+		the need to separate the two for a small/medium repository.
 		 
 	]]></description>
 	
