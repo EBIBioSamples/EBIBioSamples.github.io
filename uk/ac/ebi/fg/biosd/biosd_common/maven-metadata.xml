@@ -3,10 +3,9 @@
   <groupId>uk.ac.ebi.fg.biosd</groupId>
   <artifactId>biosd_common</artifactId>
   <versioning>
-    <release>2.0</release>
     <versions>
-      <version>2.0</version>
+      <version>2.0.1-SNAPSHOT</version>
     </versions>
-    <lastUpdated>20151029165448</lastUpdated>
+    <lastUpdated>20151029192659</lastUpdated>
   </versioning>
 </metadata>
