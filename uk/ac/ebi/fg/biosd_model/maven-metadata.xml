@@ -3,10 +3,9 @@
   <groupId>uk.ac.ebi.fg</groupId>
   <artifactId>biosd_model</artifactId>
   <versioning>
-    <release>4.0</release>
     <versions>
-      <version>4.0</version>
+      <version>4.0.1-SNAPSHOT</version>
     </versions>
-    <lastUpdated>20151029165553</lastUpdated>
+    <lastUpdated>20151029192834</lastUpdated>
   </versioning>
 </metadata>
