@@ -3,10 +3,9 @@
   <groupId>uk.ac.ebi.fg</groupId>
   <artifactId>biosd_loader</artifactId>
   <versioning>
-    <release>3.0</release>
     <versions>
-      <version>3.0</version>
+      <version>3.0.1-SNAPSHOT</version>
     </versions>
-    <lastUpdated>20151029170017</lastUpdated>
+    <lastUpdated>20151029193219</lastUpdated>
   </versioning>
 </metadata>
