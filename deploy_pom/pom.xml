@@ -3,7 +3,7 @@
 
   <groupId>uk.ac.ebi.fg.biosd</groupId>
   <artifactId>biosd_deploy</artifactId>
-  <version>1.0-SNAPSHOT</version>
+  <version>1.0</version>
   <packaging>pom</packaging>
 
   <name>BioSD Deploy POM</name>
@@ -48,7 +48,7 @@
 		 
 		Then generate an OAuth token (or decide to use an existing one) at https://github.com/settings/tokens
 		
-		4. Setup your settings.xml with the your token: 
+		4. Setup your settings.xml (usually in $HOME/.m2) with the your token: 
 
     <server>
       <id>github</id>
