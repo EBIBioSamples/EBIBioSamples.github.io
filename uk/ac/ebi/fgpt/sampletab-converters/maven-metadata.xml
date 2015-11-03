@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata>
+  <groupId>uk.ac.ebi.fgpt</groupId>
+  <artifactId>sampletab-converters</artifactId>
+  <versioning>
+    <versions>
+      <version>1.0.24-SNAPSHOT</version>
+    </versions>
+    <lastUpdated>20151103170112</lastUpdated>
+  </versioning>
+</metadata>
