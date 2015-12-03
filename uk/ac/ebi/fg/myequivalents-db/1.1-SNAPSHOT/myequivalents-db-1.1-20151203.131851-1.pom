@@ -1,0 +1,134 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  
+  <modelVersion>4.0.0</modelVersion>
+  <artifactId>myequivalents-db</artifactId>
+  <name>My Equivalents, Db Impl</name>
+  
+  <description>A programmatic, JDBC-based implementation of the myEquivalents functionality.</description>
+  
+  
+	<parent>
+		<groupId>uk.ac.ebi.fg</groupId>
+		<artifactId>myequivalents</artifactId>
+		<version>1.1-SNAPSHOT</version>
+	</parent>
+	
+	<dependencies>
+		
+		<dependency>
+		   <groupId>org.hibernate</groupId>
+		   <artifactId>hibernate-entitymanager</artifactId>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-c3p0</artifactId>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-orm</artifactId>
+		</dependency>	  	
+		
+		<dependency>
+			<groupId>javax.xml.bind</groupId>
+			<artifactId>jaxb-api</artifactId>
+		</dependency>
+				
+		<dependency>
+			<groupId>commons-beanutils</groupId>
+			<artifactId>commons-beanutils</artifactId>
+		</dependency>
+		            		
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+		</dependency>	  
+		            
+
+		<!-- Project Modules -->
+
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>myequivalents-core</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+
+						
+
+		<!-- TEST -->
+
+		<!-- Intercepts log4j and sends it to SL4J -->		
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>log4j-over-slf4j</artifactId>
+			<scope>test</scope>
+		</dependency>
+		
+		<!-- Do the same for commons -->
+		<dependency>
+		  <groupId>commons-logging</groupId>
+		  <artifactId>commons-logging</artifactId>
+		  <version>1.1.1</version>
+		  <scope>provided</scope>
+		</dependency>
+		<dependency>
+		  <groupId>org.slf4j</groupId>
+		  <artifactId>jcl-over-slf4j</artifactId>
+		  <scope>test</scope>
+		</dependency>		
+
+		<!-- Use Logback as concrete test logger -->
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-classic</artifactId>
+			<scope>test</scope>
+		</dependency>
+		
+		<!-- Brilliant! package to verify expected exceptions (http://code.google.com/p/catch-exception/) -->
+		<dependency>
+	    <groupId>com.googlecode.catch-exception</groupId>
+	    <artifactId>catch-exception</artifactId>
+	    <scope>test</scope>
+		</dependency>
+		
+		<dependency>
+			<groupId>joda-time</groupId>
+			<artifactId>joda-time</artifactId>
+			<scope>test</scope>
+		</dependency>
+            		
+		<dependency>
+			<groupId>com.google.code.tempus-fugit</groupId>
+			<artifactId>tempus-fugit</artifactId>
+			<scope>test</scope>
+		</dependency>	  
+            		
+	</dependencies>  
+
+
+	<build>
+		<finalName>myequivalents-db_${project.version}</finalName>
+	</build>
+
+	<profiles>
+	
+		<!--  
+			Used for parallel/LSF testing. Parallel resource copies clash each other, with files that are emptied by
+			an instance, while another is attempting to read them
+		-->
+		<profile>
+			<id>no_copy</id>
+			<build>
+				<plugins>
+					<plugin>
+        		<artifactId>maven-resources-plugin</artifactId>
+        		<configuration>
+        			<skip>true</skip>
+        		</configuration> 
+        	</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
+</project>
