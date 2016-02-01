@@ -1,0 +1,182 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	
+  <modelVersion>4.0.0</modelVersion>
+  
+  <groupId>uk.ac.ebi</groupId>
+  <artifactId>jutils</artifactId>
+  <version>5.1-SNAPSHOT</version>
+  
+  <name>JUtils - Miscellanea of Java Utils</name>
+  <description>
+  	General utility code for several purposes, developed for the BII/ISA-Tools project and reusable elsewhere.
+  
+  	The project originated in the ISA-Tools project (http://isa-tools.org).
+  </description>
+  <url>https://github.com/ISA-tools/jUtils</url>
+
+  <!-- Developer Listing -->
+  <developers>
+    <developer>
+      <id>brandizi</id>
+      <name>Marco Brandizi</name>
+      <email>brandizi@ebi.ac.uk</email>
+      <organization>EBI - Functional Genomics Group</organization>
+      <organizationUrl>http://www.ebi.ac.uk/fg</organizationUrl>
+      <timezone>0</timezone>
+      <properties />
+    </developer>
+  </developers>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+
+  <scm>
+  	<developerConnection>scm:git:git@github.com:ISA-tools/jUtils.git</developerConnection>
+    <tag>HEAD</tag>
+  </scm>   
+
+
+	<parent>
+		<groupId>uk.ac.ebi.fg.biosd</groupId>
+		<artifactId>biosd_deploy</artifactId>
+		<version>1.0</version>
+	</parent>
+
+
+	<dependencies>
+	
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>1.7.5</version>
+		</dependency>
+		
+		<!-- An SLF4J extension, which allows for log levels (http://projects.lidalia.org.uk/lidalia-slf4j-ext/) -->
+		<dependency>
+		  <groupId>uk.org.lidalia</groupId>
+		  <artifactId>lidalia-slf4j-ext</artifactId>
+		  <version>1.0.0</version>
+		  <exclusions>
+		  	<exclusion>
+		  		<groupId>com.google.guava</groupId>
+		  		<artifactId>guava</artifactId>
+		  	</exclusion>
+		  </exclusions>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<version>3.3.1</version>
+		</dependency>
+
+
+	  <dependency>
+	    <groupId>junit</groupId>
+	    <artifactId>junit</artifactId>
+	    <version>4.10</version>
+	  </dependency>
+	  
+	  <!-- It seems that currently there is no official Oracle release of JPA 2.0, so we need to rely on some implementor  -->
+		<dependency>
+			<groupId>org.hibernate.javax.persistence</groupId>
+			<artifactId>hibernate-jpa-2.1-api</artifactId>
+			<version>1.0.0.Final</version>
+		</dependency>
+		
+		<dependency>
+		  <groupId>com.google.guava</groupId>
+		  <artifactId>guava</artifactId>
+		  <version>18.0</version>
+		</dependency>		
+
+		
+		<!-- TEST -->
+
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-classic</artifactId>
+			<version>0.9.29</version>
+	    <scope>test</scope>
+		</dependency>
+
+	</dependencies>
+	
+	<build>
+		<plugins>
+		
+      <plugin>
+	      <artifactId>maven-compiler-plugin</artifactId>
+	      <configuration>
+	        <source>1.7</source>
+	        <target>1.7</target>
+	        <encoding>utf-8</encoding>
+	      </configuration>
+	    </plugin>
+	
+	    <plugin>
+		    <artifactId>maven-source-plugin</artifactId>
+		    <executions>
+		      <execution>
+		        <id>attach-source</id>
+		        <goals>
+		          <goal>jar</goal>
+		        </goals>
+		      </execution>
+		    </executions>
+	    </plugin>
+
+		  <plugin>
+		    <groupId>org.apache.maven.plugins</groupId>
+		    <artifactId>maven-surefire-plugin</artifactId>
+		    <configuration>
+		      <properties>
+		        <property>
+		        	<!-- Prints out spaces and test name before/after every test method and automatically -->
+		          <name>listener</name>
+		          <value>uk.ac.ebi.utils.test.junit.TestOutputDecorator</value>
+		        </property>
+		       </properties>
+		    </configuration>
+		  </plugin>
+		
+    </plugins>
+	
+    <testResources>
+	    <testResource>
+	      <directory>src/test/resources</directory>
+	      <filtering>true</filtering>
+	    </testResource>
+    </testResources>
+
+    <resources>
+	    <resource>
+	      <directory>src/main/resources</directory>
+	      <filtering>true</filtering>
+	    </resource>
+    </resources>
+
+    <extensions>
+	    <extension>
+	      <groupId>org.apache.maven.wagon</groupId>
+	      <artifactId>wagon-ssh</artifactId>
+	      <version>2.6</version>
+	    </extension>
+    </extensions>    
+
+	</build>
+	
+  <repositories>
+
+		<repository>
+	    <id>EBIBioSamples-GH-repo</id>
+	    <url>https://raw.githubusercontent.com/EBIBioSamples/EBIBioSamples.github.io/maven-repo</url>
+	    <snapshots>
+        <enabled>true</enabled>
+	    </snapshots>
+    </repository>
+		
+  </repositories>
+	    
+</project>
