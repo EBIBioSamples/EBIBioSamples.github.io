@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata>
+  <groupId>uk.ac.ebi.fg</groupId>
+  <artifactId>java2rdf</artifactId>
+  <versioning>
+    <versions>
+      <version>0.0.1-SNAPSHOT</version>
+    </versions>
+    <lastUpdated>20160222173347</lastUpdated>
+  </versioning>
+</metadata>
