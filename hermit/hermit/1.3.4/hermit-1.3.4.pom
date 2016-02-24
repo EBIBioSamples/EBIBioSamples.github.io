@@ -1,8 +1,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
   <!-- Used to deploy the Hermit Binary 
-	  Install: mvn install:install-file -DpomFile=pom.xml -Dfile=org.semanticweb.HermiT.jar
-		Deploy: mvn deploy:deploy-file -DpomFile=pom.xml -Dfile=org.semanticweb.HermiT.jar -DrepositoryId=EBIBioSamples-GH-repo
+		
 		You need access rights to our EBI repo for this to work, see pom.xml in the biosd_deploy[1] parent above
 		
 		[1] https://github.com/EBIBioSamples/EBIBioSamples.github.io/blob/master/deploy_pom/pom.xml
