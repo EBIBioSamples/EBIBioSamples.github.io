@@ -3,10 +3,9 @@
   <groupId>uk.ac.ebi.fgpt</groupId>
   <artifactId>sampletab-converters</artifactId>
   <versioning>
-    <release>1.0.25</release>
     <versions>
-      <version>1.0.25</version>
+      <version>1.0.26-SNAPSHOT</version>
     </versions>
-    <lastUpdated>20160307092747</lastUpdated>
+    <lastUpdated>20160307092757</lastUpdated>
   </versioning>
 </metadata>
