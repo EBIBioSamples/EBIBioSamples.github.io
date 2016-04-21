@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata modelVersion="1.1.0">
+  <groupId>uk.ac.ebi.fgpt</groupId>
+  <artifactId>sampletab_converters_biosdom</artifactId>
+  <version>1.0.9-SNAPSHOT</version>
+  <versioning>
+    <snapshot>
+      <timestamp>20160421.125618</timestamp>
+      <buildNumber>1</buildNumber>
+    </snapshot>
+    <lastUpdated>20160421125618</lastUpdated>
+    <snapshotVersions>
+      <snapshotVersion>
+        <extension>jar</extension>
+        <value>1.0.9-20160421.125618-1</value>
+        <updated>20160421125618</updated>
+      </snapshotVersion>
+      <snapshotVersion>
+        <extension>pom</extension>
+        <value>1.0.9-20160421.125618-1</value>
+        <updated>20160421125618</updated>
+      </snapshotVersion>
+    </snapshotVersions>
+  </versioning>
+</metadata>
