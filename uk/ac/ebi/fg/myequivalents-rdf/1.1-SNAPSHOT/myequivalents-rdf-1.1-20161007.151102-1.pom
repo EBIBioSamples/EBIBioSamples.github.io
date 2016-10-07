@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+    <artifactId>myequivalents</artifactId>
+    <groupId>uk.ac.ebi.fg</groupId>
+    <version>1.1-SNAPSHOT</version>
+  </parent>
+
+	<artifactId>myequivalents-rdf</artifactId>	
+  <name>My Equivalents, RDF Bridging</name>  
+  <description>Code to export myEquivalents to RDF</description>
+	
+
+	<dependencies>
+
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+		</dependency>
+
+		<!-- Use Logback as concrete logger -->
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-classic</artifactId>
+			<scope>test</scope>
+		</dependency>
+
+		<!-- Intercepts log4j and sends it to SL4J -->
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>log4j-over-slf4j</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>uk.ac.ebi.fg</groupId>
+			<artifactId>java2rdf</artifactId>
+  		<version>0.0.1-SNAPSHOT</version>
+  		<exclusions>
+	  		<exclusion>
+			    <groupId>org.apache.jena</groupId>
+			    <artifactId>apache-jena-libs</artifactId>
+	  		</exclusion>
+  		</exclusions>
+		</dependency>
+
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>myequivalents-core</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>myequivalents-db</artifactId>
+			<version>${project.version}</version>
+			<scope>test</scope>
+		</dependency>
+
+		<!-- dependency>
+			<groupId>uk.ac.ebi</groupId>
+			<artifactId>jutils</artifactId>
+		</dependency -->
+		
+		<!-- 
+		  Jena is used by SparqlBasedTester, a utility to verify the existence of certain statements in a RDF file,
+			using SPARQL. For the moment this is living together with OWL-API, we plan to make the triple store to use with
+			java2rdf configurable and the dependency pluggable. 
+		-->
+		<dependency>
+	    <groupId>org.apache.jena</groupId>
+	    <artifactId>apache-jena-libs</artifactId>
+	    <version>3.0.1</version>
+	    <type>pom</type>
+	    <scope>test</scope>
+	    <exclusions>
+	    	<!-- We use our own logger (see above) -->
+	    	<exclusion>
+					<groupId>org.slf4j</groupId>
+					<artifactId>slf4j-log4j12</artifactId>
+	    	</exclusion>
+	    	<exclusion>
+					<groupId>xml-apis</groupId>
+					<artifactId>xml-apis</artifactId>
+	    	</exclusion>
+	    </exclusions>
+		</dependency>
+		
+		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+			<version>${h2.version}</version>
+			<scope>test</scope>
+		</dependency>		
+
+	</dependencies>
+
+	<build>
+
+		<finalName>${project.artifactId}_${project.version}</finalName>
+
+
+		<testResources>
+			<testResource>
+				<directory>src/test/resources</directory>
+				<filtering>true</filtering>
+			</testResource>
+		</testResources>
+
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>true</filtering>
+			</resource>
+		</resources>
+
+		<plugins>
+
+			<!-- The package for line commands is built through this -->
+			<plugin>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<configuration>
+					<archiverConfig>
+						<fileMode>0755</fileMode>
+						<directoryMode>0755</directoryMode>
+						<defaultDirectoryMode>0755</defaultDirectoryMode>
+					</archiverConfig>
+				</configuration>
+				<executions>
+					<execution>
+						<id>pkg</id>
+						<configuration>
+							<finalName>${project.artifactId}_${project.version}</finalName>
+							<appendAssemblyId>false</appendAssemblyId>
+							<attach>true</attach>
+							<descriptors>
+								<descriptor>src/main/assembly/pkg.xml</descriptor>
+							</descriptors>
+						</configuration>
+						<phase>package</phase>
+						<goals>
+							<goal>single</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
+		</plugins>
+
+	</build>
+		
+</project>
