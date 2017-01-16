@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata>
+  <groupId>uk.ac.ebi</groupId>
+  <artifactId>jutils-io</artifactId>
+  <versioning>
+    <versions>
+      <version>6.0-SNAPSHOT</version>
+    </versions>
+    <lastUpdated>20170116220619</lastUpdated>
+  </versioning>
+</metadata>
