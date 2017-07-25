@@ -3,10 +3,9 @@
   <groupId>uk.ac.ebi</groupId>
   <artifactId>jutils-pom</artifactId>
   <versioning>
-    <release>6.0</release>
     <versions>
-      <version>6.0</version>
+      <version>6.0.1-SNAPSHOT</version>
     </versions>
-    <lastUpdated>20170725135210</lastUpdated>
+    <lastUpdated>20170725135714</lastUpdated>
   </versioning>
 </metadata>
