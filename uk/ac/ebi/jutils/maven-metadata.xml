@@ -3,10 +3,9 @@
   <groupId>uk.ac.ebi</groupId>
   <artifactId>jutils</artifactId>
   <versioning>
-    <release>7.0</release>
     <versions>
-      <version>7.0</version>
+      <version>7.0.1-SNAPSHOT</version>
     </versions>
-    <lastUpdated>20180323113720</lastUpdated>
+    <lastUpdated>20180323113856</lastUpdated>
   </versioning>
 </metadata>
