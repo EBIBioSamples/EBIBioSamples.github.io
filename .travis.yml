@@ -2,7 +2,7 @@ language: java
 jdk:
   - oraclejdk8
 script:
-  - wger -O test.pom 'https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-install-plugin/2.4/maven-install-plugin-2.4.pom'
+  - wget -O test.pom 'https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-install-plugin/2.4/maven-install-plugin-2.4.pom'
   - cd deploy_pom
   # - mvn clean -X
   - mvn deploy --settings settings.xml
