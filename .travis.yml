@@ -8,3 +8,6 @@ script:
 branches:
   only:
   - master
+cache:
+  directories:
+  - "$HOME/.m2"
