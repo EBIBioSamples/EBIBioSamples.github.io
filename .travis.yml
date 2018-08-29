@@ -2,6 +2,7 @@ language: java
 jdk:
   - oraclejdk8
 script:
+  - wget -O test.yml 'https://raw.githubusercontent.com/EBIBioSamples/EBIBioSamples.github.io/master/.travis.yml'
   - wget -O test.pom 'https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-install-plugin/2.4/maven-install-plugin-2.4.pom'
   - cd deploy_pom
   # - mvn clean -X
