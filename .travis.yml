@@ -1,6 +1,6 @@
 language: java
 jdk:
-  - oraclejdk8  
+  - oraclejdk8
 script:
   - cd deploy_pom
   - mvn clean -X
@@ -8,3 +8,6 @@ script:
 branches:
   only:
   - master
+cache:
+  directories:
+  - "$HOME/.m2"
