@@ -1,7 +1,9 @@
 language: java
 jdk:
   - oraclejdk8  
-script: mvn deploy --settings settings.xml
+script:
+  cd deploy_pom  
+  mvn deploy --settings settings.xml
 branches:
   only:
   - master
