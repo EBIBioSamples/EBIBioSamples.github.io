@@ -3,10 +3,9 @@
   <groupId>uk.ac.ebi</groupId>
   <artifactId>jutils-j2ee</artifactId>
   <versioning>
-    <release>8.0</release>
     <versions>
-      <version>8.0</version>
+      <version>8.0.1-SNAPSHOT</version>
     </versions>
-    <lastUpdated>20191121221240</lastUpdated>
+    <lastUpdated>20191121221403</lastUpdated>
   </versioning>
 </metadata>
