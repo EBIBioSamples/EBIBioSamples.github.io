@@ -4,8 +4,8 @@
   <artifactId>jutils-j2ee</artifactId>
   <versioning>
     <versions>
-      <version>9.0.1-SNAPSHOT</version>
+      <version>8.0.1-SNAPSHOT</version>
     </versions>
-    <lastUpdated>20200204203128</lastUpdated>
+    <lastUpdated>20200205010156</lastUpdated>
   </versioning>
 </metadata>
