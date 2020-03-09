@@ -4,8 +4,8 @@
   <artifactId>jutils-pom</artifactId>
   <versioning>
     <versions>
-      <version>9.0.1-SNAPSHOT</version>
+      <version>10.0-SNAPSHOT</version>
     </versions>
-    <lastUpdated>20200309193722</lastUpdated>
+    <lastUpdated>20200309194016</lastUpdated>
   </versioning>
 </metadata>
