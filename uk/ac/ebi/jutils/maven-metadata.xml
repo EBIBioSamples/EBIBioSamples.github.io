@@ -4,8 +4,8 @@
   <artifactId>jutils</artifactId>
   <versioning>
     <versions>
-      <version>10.0-SNAPSHOT</version>
+      <version>9.0.1-SNAPSHOT</version>
     </versions>
-    <lastUpdated>20200428220733</lastUpdated>
+    <lastUpdated>20200429114813</lastUpdated>
   </versioning>
 </metadata>
