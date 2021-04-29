@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata>
+  <groupId>uk.ac.ebi.fg.biosd</groupId>
+  <artifactId>biosd_deploy</artifactId>
+  <versioning>
+    <versions>
+      <version>1.0.1-SNAPSHOT</version>
+    </versions>
+    <lastUpdated>20201125023548</lastUpdated>
+  </versioning>
+</metadata>
